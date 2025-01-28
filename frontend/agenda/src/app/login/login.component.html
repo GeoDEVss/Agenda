@@ -1,0 +1,12 @@
+<div>
+  <button (click)="loginWithGoogle()">Login com Google</button>
+
+  <div>
+    <h3>Ou, faça seu cadastro</h3>
+    <form (submit)="loginWithEmailAndPassword(email.value, password.value)">
+      <input #email type="email" placeholder="Email" required />
+      <input #password type="password" placeholder="Senha" required />
+      <button type="submit">Cadastrar</button>
+    </form>
+  </div>
+</div>
