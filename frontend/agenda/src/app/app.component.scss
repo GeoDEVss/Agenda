@@ -1,0 +1,22 @@
+// 🎨 Definição de variáveis globais (caso precise usar em outros lugares)
+$primary-bg: #1c1f2e;  // Azul escuro
+$text-color: #ffffff;  // Branco para melhor contraste
+
+// 🌍 Estilização global do app
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: $primary-bg;
+  color: $text-color;
+  font-family: 'Arial', sans-serif;
+}
+
+// 📌 Garantindo que o conteúdo principal fique centralizado
+app-root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; // Faz com que ocupe toda a altura da tela
+}

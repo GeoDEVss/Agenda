@@ -1,21 +1,26 @@
 import { initializeApp } from 'firebase/app';
 import { Component } from '@angular/core';
-import { provideAuth, getAuth } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { RouterOutlet } from '@angular/router';
-import { firebaseConfig } from './firebase-config';
 
 @Component({
-    selector: 'app-root',
-    standalone: true,
-    imports: [RouterOutlet],
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.css',
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'AgendaMed';
+  email: string = '';
+  password: string = '';
 
-  constructor(){
-    initializeApp(firebaseConfig)
+  onLogin(){
+    console.log('Email:', this.email);
+    console.log('Senha:', this.password);
+  }
+
+  constructor() {
+    initializeApp(environment); // Certifique-se de acessar a chave correta do Firebase
   }
 }

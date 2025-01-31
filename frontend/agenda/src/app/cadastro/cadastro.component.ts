@@ -22,4 +22,11 @@ export class CadastroComponent {
     });
   }
 
+  saveUserToDatabase(user:any){
+    console.log('Salvar no BD:',{
+      uid:user.uid,
+      email: user.email,
+    });
+  }
+
 }

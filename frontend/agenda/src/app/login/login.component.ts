@@ -1,36 +1,52 @@
 import { Component } from '@angular/core';
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-
+import { Router, RouterModule } from '@angular/router';
+import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from 'firebase/auth';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  standalone: true,
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  auth = getAuth();
+  email = '';
+  password = '';
+  isLoggingIn = false;
 
-  loginWithGoogle(){
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(this.auth,provider)
-    .then((result)=>{
-      console.log('Usuário logado com Google:',result.user);
-    })
-    .catch((error)=>{
+  constructor(private router: Router) {}
+
+  async loginWithEmailAndPassword(email: string, password: string) {
+    try {
+      const auth = getAuth();
+      await signInWithEmailAndPassword(auth, email, password);
+
+      alert('Login realizado com sucesso!');
+      this.router.navigate(['/home']);
+    } catch (error) {
+      console.error('Erro no login:', error);
+      alert('Erro ao fazer login. Verifique suas credenciais.');
+    }
+  }
+
+  async loginWithGoogle() {
+    try {
+      if (this.isLoggingIn) return;
+      this.isLoggingIn = true;
+
+      const auth = getAuth();
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+
+      alert('Login com Google realizado com sucesso!');
+      this.router.navigate(['/home']);
+    } catch (error) {
       console.error('Erro no login com Google:', error);
-    })
+      alert('Erro ao fazer login com Google.');
+    } finally {
+      this.isLoggingIn = false;
+    }
   }
-
-  loginWithEmailAndPassword(email: string, password: string){
-    createUserWithEmailAndPassword(this.auth, email,password)
-    .then((userCredential)=>{
-      const user = userCredential.user;
-      console.log('Usuário registrado com email:', user);
-    })
-    .catch((error)=>{
-      console.error('Erro no cadastro:', error);
-    });
-  }
-
 }
