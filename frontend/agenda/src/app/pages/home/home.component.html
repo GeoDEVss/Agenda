@@ -1,1 +1,18 @@
-<p>home works!</p>
+<h1>Lista de Pacientes</h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>CPF</th>
+      <th>Telefone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let patient of patients">
+      <td>{{ patient.name }}</td>
+      <td>{{ patient.cpf }}</td>
+      <td>{{ patient.phone }}</td>
+    </tr>
+  </tbody>
+</table>

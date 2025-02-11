@@ -1,0 +1,39 @@
+/* Centralizando o corpo da página com Flexbox */
+body, html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center;     /* Centraliza verticalmente */
+  background-color: #f4f4f9; /* Cor de fundo */
+}
+
+.login-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px; /* Borda arredondada */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  width: 100%;
+  max-width: 400px;  /* Limita a largura */
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 20px; /* Espaçamento abaixo do título */
+}
+
+.login-container input {
+  width: 100%; /* Faz os inputs ocuparem toda a largura da div */
+  margin-bottom: 15px; /* Espaço entre os campos de input */
+}
+
+.login-container button {
+  width: 100%; /* Faz o botão ocupar toda a largura da div */
+  margin-bottom: 10px; /* Espaço abaixo do botão */
+}
+
+/* Estilo para o botão de login com Google */
+.login-container .btn-danger {
+  width: 100%;
+  background-color: red;
+}

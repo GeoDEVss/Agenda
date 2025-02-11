@@ -1,4 +1,4 @@
-export const firebaseConfig = {
+export const firebase = {
   apiKey: "AIzaSyC7N1G0RA_smI1mfdEhPyQuniDz1TSEIzk",
   authDomain: "agendamed-b7f87.firebaseapp.com",
   projectId: "agendamed-b7f87",

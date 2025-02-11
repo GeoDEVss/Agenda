@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+/* Estilos globais */
+html, body {
+  height: 100%; /* Garante que a altura do body ocupe 100% da tela */
+  margin: 0;    /* Remove as margens padrão */
+  padding: 0;   /* Remove o preenchimento padrão */
+  font-family: Arial, sans-serif; /* Define a fonte */
+  background-color: #e5eeee; /* Cor de fundo */
+}
+
+/* Personalizando a área do body */
+body {
+  padding: 20px;  /* Adiciona um pouco de espaçamento interno */
+  margin: 0;      /* Remove a margem */
+  display: flex;  /* Usado para centralizar o conteúdo */
+  justify-content: center;  /* Centraliza horizontalmente */
+  align-items: center;  /* Centraliza verticalmente */
+  height: 100vh;  /* Garante que o body ocupe 100% da altura da tela */
+  color: rgb(33, 177, 165);   /* Cor do texto */
+}

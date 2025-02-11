@@ -21,6 +21,11 @@ export class FirestoreService {
     return collectionData(colRef,{idField: 'id'});
   }
 
+  getPatients(): Observable<any[]> {
+    return this.getData('patients');
+  }
+
+
   //atualizar um doc em específico
   async deleteData(collectionName: string, docId: string) {
     const docRef = doc(this.firestore,`${collectionName}/${docId}`);

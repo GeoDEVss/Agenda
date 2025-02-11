@@ -8,7 +8,7 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'AgendaMed';
@@ -21,6 +21,6 @@ export class AppComponent {
   }
 
   constructor() {
-    initializeApp(environment); // Certifique-se de acessar a chave correta do Firebase
+    initializeApp(environment.firebase); // Certifique-se de acessar a chave correta do Firebase
   }
 }
