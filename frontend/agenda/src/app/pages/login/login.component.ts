@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './login.component.html',
-  styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.min.css','./login.component.css','../../styles.css'],
+  styleUrls: ['./login.component.css', '../../../styles.css'], // Removendo Bootstrap daqui
   encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent {

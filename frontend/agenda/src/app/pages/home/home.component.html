@@ -1,18 +1,64 @@
-<h1>Lista de Pacientes</h1>
+<nav class="navbar navbar-dark bg-primary px-4">
+  <a class="navbar-brand text-white">
+    <i class="bi bi-calendar-check"></i> AgendaMed
+  </a>
 
-<table border="1">
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>CPF</th>
-      <th>Telefone</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let patient of patients">
-      <td>{{ patient.name }}</td>
-      <td>{{ patient.cpf }}</td>
-      <td>{{ patient.phone }}</td>
-    </tr>
-  </tbody>
-</table>
+  <form class="d-flex mx-auto w-50" (submit)="buscarPacientes()">
+    <input
+      type="text"
+      class="form-control me-2"
+      placeholder="Pesquise paciente pelo nome ou CPF"
+      [(ngModel)]="termoPesquisa"
+      name="search"
+    />
+    <button type="submit" class="btn btn-light">
+      <i class="bi bi-search"></i>
+    </button>
+  </form>
+
+  <button class="btn btn-outline-light">
+    <i class="bi bi-box-arrow-right"></i> Logout
+  </button>
+</nav>
+
+<!-- Botão de Cadastrar Paciente fora da navbar, alinhado à direita -->
+<div class="container mt-3 d-flex justify-content-end">
+  <button class="btn btn-primary" (click)="mostrarFormulario()">
+    <i class="bi bi-person"></i> Cadastrar Paciente</button>
+</div>
+
+<!-- Componente de Cadastro -->
+<div class="m-4">
+  <app-cadastro *ngIf="exibirCadastro" (fechar)="fecharFormulario()"></app-cadastro>
+</div>
+
+<!-- Card do Paciente e Consultas -->
+<div *ngIf="pacienteEncontrado" class="card w-50 mx-auto my-4">
+  <div class="card-header bg-primary text-white">
+    <i class="bi bi-person"></i> {{ pacienteEncontrado.nome }}
+    <button
+      class="btn btn-sm btn-light p-0 px-1"
+      style="font-size: 0.8rem; line-height: 1;"
+      (click)="fecharPesquisa()">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+  <div class="card-body">
+    <p><strong>CPF:</strong> {{ pacienteEncontrado.cpf }}</p>
+    <p><strong>Email:</strong> {{ pacienteEncontrado.email }}</p>
+    <p><strong>Nascimento:</strong> {{ pacienteEncontrado.nascimento }}</p>
+    <p><strong>Endereço:</strong> {{ pacienteEncontrado.endereco }}</p>
+    <p><strong>Contato de Emergência:</strong> {{ pacienteEncontrado.emergencia }}</p>
+
+    <h5 class="mt-4">Consultas Passadas:</h5>
+    <ul class="list-group">
+      <li *ngFor="let consulta of consultas" class="list-group-item">
+        <strong>Data:</strong> {{ consulta.data }} <br>
+        <strong>Descrição:</strong> {{ consulta.descricao }}
+      </li>
+      <li *ngIf="consultas.length === 0" class="list-group-item">
+        Nenhuma consulta encontrada.
+      </li>
+    </ul>
+  </div>
+</div>
