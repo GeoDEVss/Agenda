@@ -1,0 +1,25 @@
+<!-- Formulário de Cadastro de Médico -->
+<div class="card mt-3 w-50 mx-auto">
+  <div class="card-header bg-success text-white">
+    <i class="bi bi-person-badge"></i> Cadastro de Médico
+    <button class="btn-close float-end" (click)="fecharFormulario()"></button>
+  </div>
+  <div class="card-body">
+    <form (ngSubmit)="cadastrarMedico()">
+      <div class="mb-3">
+        <label for="nome" class="form-label">Nome:</label>
+        <input type="text" class="form-control" id="nome" [(ngModel)]="medico.nome" name="nome">
+      </div>
+      <div class="mb-3">
+        <label for="crm" class="form-label">CRM:</label>
+        <input type="text" class="form-control" id="crm" [(ngModel)]="medico.crm" name="crm">
+      </div>
+      <div class="mb-3">
+        <label for="especialidade" class="form-label">Especialidade:</label>
+        <input type="text" class="form-control" id="especialidade" [(ngModel)]="medico.especialidade" name="especialidade">
+      </div>
+      <button type="submit" class="btn btn-success">Salvar</button>
+      <button type="button" class="btn btn-secondary" (click)="fecharFormulario()">Fechar</button>
+    </form>
+  </div>
+</div>
