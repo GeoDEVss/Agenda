@@ -77,29 +77,88 @@
 </section>
 
 <!-- Seção de Cadastro e Agendamento -->
-<section id="cadastro" class="py-5 bg-light">
-  <div class="container text-center p-4 rounded shadow bg-white" style="max-width: 600px; margin: 0 auto;">    <h2 class="mb-4 text-primary">Cadastro <i class="bi bi-person-plus-fill"></i></h2>
+<section id="cadastro-agendamento" class="py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      <!-- Seção de Cadastro (esquerda) -->
+      <div class="col-md-6">
+        <div class="p-4 rounded shadow bg-white">
+          <h2 class="mb-4 text-primary text-center">Cadastro <i class="bi bi-person-plus-fill"></i></h2>
 
-    <div *ngIf="!mostrarCadastroPaciente && !mostrarCadastroMedico">
-      <!-- Botões de cadastro aparecem apenas quando nenhum formulário estiver aberto -->
-      <div class="d-flex justify-content-center gap-3 mt-4">
-        <button class="btn btn-success d-flex align-items-center gap-2" (click)="mostrarCadastroPaciente = true">
-          <i class="bi bi-person-fill"></i> Cadastrar Paciente
-        </button>
-        <button class="btn btn-info d-flex align-items-center gap-2" (click)="mostrarCadastroMedico = true">
-          <i class="bi bi-person-badge-fill"></i> Cadastrar Médico
-        </button>
+          <div *ngIf="!mostrarCadastroPaciente && !mostrarCadastroMedico">
+            <div class="d-flex justify-content-center gap-3 mt-4">
+              <button class="btn btn-success d-flex align-items-center gap-2" (click)="mostrarCadastroPaciente = true">
+                <i class="bi bi-person-fill"></i> Cadastrar Paciente
+              </button>
+              <button class="btn btn-info d-flex align-items-center gap-2" (click)="mostrarCadastroMedico = true">
+                <i class="bi bi-person-badge-fill"></i> Cadastrar Médico
+              </button>
+            </div>
+          </div>
+
+          <!-- Formulário de Cadastro -->
+          <div *ngIf="mostrarCadastroPaciente" class="mt-4">
+            <app-cadastro (fechar)="fecharFormulario('paciente')"></app-cadastro>
+          </div>
+
+          <div *ngIf="mostrarCadastroMedico" class="mt-4">
+            <app-cadastro-medico (fechar)="fecharFormulario('medico')"></app-cadastro-medico>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- Formulário de Cadastro de Paciente, dentro da seção -->
-    <div *ngIf="mostrarCadastroPaciente" class="mt-4">
-      <app-cadastro (fechar)="fecharFormulario('paciente')"></app-cadastro>
-    </div>
+      <!-- Seção de Agendamento (direita) -->
+      <div class="col-md-6">
+        <div class="p-4 rounded shadow bg-white">
+          <h2 class="text-center mb-4 text-primary">Agendar Consulta</h2>
 
-    <!-- Formulário de Cadastro de Médico, dentro da seção -->
-    <div *ngIf="mostrarCadastroMedico" class="mt-4">
-      <app-cadastro-medico (fechar)="fecharFormulario('medico')"></app-cadastro-medico>
+          <div class="mb-3">
+            <label for="cpf" class="form-label">CPF do Paciente:</label>
+            <input type="text" id="cpf" class="form-control" [(ngModel)]="termoPesquisa">
+            <button class="btn btn-primary mt-2 w-100" (click)="agendarConsulta()">Buscar Paciente</button>
+          </div>
+
+          <div *ngIf="pacienteEncontrado" class="mt-4">
+            <div class="alert alert-success">
+              <h4>Paciente Encontrado: {{ pacienteEncontrado.nome }}</h4>
+            </div>
+
+            <div class="mb-3">
+              <label for="medico" class="form-label">Escolha o Médico:</label>
+              <select id="medico" class="form-select" [(ngModel)]="medicoSelecionado" (change)="onMedicoChange()">
+                <option value="" disabled selected>Selecione um médico</option>
+                <option *ngFor="let medico of medicosDisponiveis" [ngValue]="medico.id">
+                  {{ medico.nome }} - {{ medico.especialidade }}
+                </option>
+              </select>
+
+            </div>
+
+            <div class="mb-3">
+              <label for="horario" class="form-label">Horário:</label>
+              <input type="time" id="horario" class="form-control" [(ngModel)]="horarioSelecionado">
+            </div>
+
+            <div class="mb-3">
+              <label for="dataConsulta" class="form-label">Data da Consulta:</label>
+              <input type="date" id="dataConsulta" class="form-control" [(ngModel)]="dataConsultaSelecionada">
+            </div>
+
+            <button class="btn btn-success w-100" (click)="confirmarAgendamento()">
+              Confirmar Agendamento
+            </button>
+          </div>
+
+          <div *ngIf="pacienteEncontrado === null" class="alert alert-danger mt-3">
+            Nenhum paciente encontrado com esse CPF.
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- Footer -->
+<footer class="bg-primary text-white text-center py-3 mt-4">
+  <p class="mb-0">© 2024 AgendaMed. Todos os direitos reservados.</p>
+</footer>
